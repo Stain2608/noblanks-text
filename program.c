@@ -1,10 +1,10 @@
 #include <stdio.h>
-#define MAXLINE 1000 /* tamaño máximo de la línea de entrada */
+#define MAXLINE 1000 /* INPUT LIMIT */
 
-char texf[MAXLINE];
-char texi[MAXLINE];
+char texi[MAXLINE]; /* RAW TEXT */
+char texf[MAXLINE]; /* FIXED TEXT */
 
-int blanks = 0;
+int blanks = 0; /* A COUNTER TO BLANKS, CHARACTERS AND NEWLINES */
 int charac = 0;
 int nl = 0;
 
@@ -12,7 +12,7 @@ int fix(void);
 int getext(void);
 int verify(void);
 
-int fix(void) {
+int fix(void) { /* WRITE texi TO texf BUT WITHOUT BLANKS AND TABS */
 
     extern char texi[];
     extern char texf[];
@@ -22,7 +22,6 @@ int fix(void) {
     extern int nl;
 
     int q = 0;
-    int end = 0;
     int i = 0;
     int max = MAXLINE;
 
@@ -50,7 +49,7 @@ int fix(void) {
     return i;
 }
 
-int getext(void) {
+int getext(void) { /* GET THE INPUT TO texi */
 
     extern char texi[];
     extern char texf[];
@@ -78,7 +77,7 @@ int getext(void) {
     return i;
 }
 
-int verify(void) {
+int verify(void) { /* VERIFY THE NUMBERS OF EACH KIND OF CHARACTER */
 
     extern int blanks;
     extern int charac;
@@ -100,23 +99,23 @@ int verify(void) {
         ver = 3;
     }
 
-    if (ver == 0) {
+    if (ver == 0) { /* WHEN IN texf THERE IS NO BLANKS OR CHARACTERS GETS 0 */
         if (nl > 0) {
             printf("Only ENTER character are not allowed\n");
             printf("TRY AGAIN\n");
             fin = 0;
         }
     }
-    if (ver == 1) {
+    if (ver == 1) { /* WHEN IN texf THERE ARE ONLY BLANKS GETS 1 */
         printf("Only BLANKS characters are not allowed\n");
         printf("TRY AGAIN\n");
         fin = 1;
     }
-    if (ver == 2 || ver == 3) {
+    if (ver == 2 || ver == 3) { /* WHEN IN texf THERE ARE MORE THAN ONE CHARACTER  GETS 2 */
 
         fin = 2;
     }
-    return fin;
+    return fin; /* RETURN TO MAIN THE CHOOSEN FIN */
 }
 
 int main(void) {
@@ -129,7 +128,7 @@ int main(void) {
 
         int f = verify();
 
-        if (f == 0) {
+        if (f == 0) {           
             printf("0\n");
             break;
         }
